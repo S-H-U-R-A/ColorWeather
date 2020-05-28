@@ -7,9 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object OpenWeatherClient {
     private val openWeatherapi: OpenWeatherApi
+    private const val  UNITS = "metric"
+    private const val  LANGUAGE = "es"
     private const val  API_KEY: String  = "c1cb69d2d06a27a5b65dc49c1e266a13"
-    private const val  OPEN_WEATHER_API     = "https://api.openweathermap.org/"
-    private val coordinates: Pair<String,String>     = Pair("7.11392", "-73.1198 7")
+    private const val  OPEN_WEATHER_API     = "https://api.openweathermap.org/data/2.5/"
+    private val coordinates: Pair<String,String>     = Pair("7.1253901", "-73.1197968")
 
     init {
         val builder = okhttp3.OkHttpClient.Builder()
@@ -28,7 +30,7 @@ object OpenWeatherClient {
 
     public fun getWeather(lat: String = coordinates.first,
                           lon: String = coordinates.second): Call<Json4Kotlin_Base>{
-        return openWeatherapi.getWeather( lat,lon, this.API_KEY );
+        return openWeatherapi.getWeather( lat,  lon, this.API_KEY, this.UNITS, this.LANGUAGE);
     }
 
 }
