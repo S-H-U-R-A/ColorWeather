@@ -1,17 +1,20 @@
 package com.essa.colorweather.data.net
 import Json4Kotlin_Base
+import android.util.Log
+import com.essa.colorweather.ui.activities.MainActivity
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit.Builder
 import retrofit2.converter.gson.GsonConverterFactory
 
 object OpenWeatherClient {
+
     private val openWeatherapi: OpenWeatherApi
-    private const val  UNITS = "metric"
-    private const val  LANGUAGE = "es"
-    private const val  API_KEY: String  = "c1cb69d2d06a27a5b65dc49c1e266a13"
-    private const val  OPEN_WEATHER_API     = "https://api.openweathermap.org/data/2.5/"
-    private val coordinates: Pair<String,String>     = Pair("7.1253901", "-73.1197968")
+    private  val  UNITS = "metric"
+    private  val  LANGUAGE = "es"
+    private  val  API_KEY: String  = "c1cb69d2d06a27a5b65dc49c1e266a13"
+    private  val  OPEN_WEATHER_API     = "https://api.openweathermap.org/data/2.5/"
+    //private val coordinates: Pair<String,String>     = Pair( "7.8939099", "-72.5078201")
 
     init {
         val builder = okhttp3.OkHttpClient.Builder()
@@ -28,8 +31,8 @@ object OpenWeatherClient {
         openWeatherapi = retrofit.create(OpenWeatherApi::class.java)
     }
 
-    public fun getWeather(lat: String = coordinates.first,
-                          lon: String = coordinates.second): Call<Json4Kotlin_Base>{
+    public fun getWeather(lat: String , lon: String ): Call<Json4Kotlin_Base>{
+        Log.i("Cliente", lat)
         return openWeatherapi.getWeather( lat,  lon, this.API_KEY, this.UNITS, this.LANGUAGE);
     }
 
